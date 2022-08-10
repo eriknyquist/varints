@@ -8,7 +8,7 @@ int main(void)
 {
     uint8_t buf[VARINTS_MAX_ENCODED_LEN];
     int size = 0;
-    int val = -2232334;
+    int val = -8193;
 
     if (0 != varint_encode_i64(val, buf, &size))
     {

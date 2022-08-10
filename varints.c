@@ -9,7 +9,7 @@
 
 
 /**
- * Encodes an unsigned 64-bit value to a VLQ byte stream.
+ * Encodes an unsigned 64-bit value to a VLQ/varint byte stream.
  */
 static void _u64_to_varint(uint64_t input, uint8_t *output, int *bytes_generated)
 {
@@ -36,7 +36,7 @@ static void _u64_to_varint(uint64_t input, uint8_t *output, int *bytes_generated
 
 
 /**
- * Encodes an unsigned 64-bit value to a VLQ byte stream.
+ * Decodes a VLQ/varint byte stream to an unsigned 64-bit integer.
  */
 static int _varint_to_u64(uint8_t *input, uint64_t *output, int *bytes_consumed)
 {
@@ -109,7 +109,7 @@ int varint_encode_i64(int64_t input, uint8_t *output, int *bytes_generated)
         return -1;
     }
 
-    uint64_t uintin = (input << 1) ^ (input >> 63u);
+    uint64_t uintin = (uint64_t) ((input << 1) ^ (input >> 63));
     _u64_to_varint(uintin, output, bytes_generated);
 
     return 0;
