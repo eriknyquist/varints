@@ -384,6 +384,17 @@ void test_varint_u64_decode_null_bytes_consumed(void)
 }
 
 
+// Tests that varint_decode_u64 returns 1 if the end of the VLQ stream is not found
+void test_varint_u64_decode_end_not_found(void)
+{
+    uint8_t input[VARINTS_MAX_ENCODED_LEN];
+    (void) memset(input, 0x80, sizeof(input));
+    int bytes_consumed;
+    uint64_t output;
+    TEST_ASSERT_EQUAL_INT(1, varint_decode_u64(input, &output, &bytes_consumed));
+}
+
+
 // Tests that varint_encode_i64 returns -1 when a NULL output pointer is passed
 void test_varint_i64_encode_null_output(void)
 {
@@ -444,6 +455,17 @@ void test_varint_i64_decode_null_bytes_consumed(void)
 
     // Verify both decoded values match
     TEST_ASSERT_EQUAL_INT(out1, out2);
+}
+
+
+// Tests that varint_decode_i64 returns 1 if the end of the VLQ stream is not found
+void test_varint_i64_decode_end_not_found(void)
+{
+    uint8_t input[VARINTS_MAX_ENCODED_LEN];
+    (void) memset(input, 0x80, sizeof(input));
+    int bytes_consumed;
+    int64_t output;
+    TEST_ASSERT_EQUAL_INT(1, varint_decode_i64(input, &output, &bytes_consumed));
 }
 
 
@@ -516,12 +538,14 @@ int main(void)
     RUN_TEST(test_varint_u64_decode_null_output);
     RUN_TEST(test_varint_u64_decode_null_input);
     RUN_TEST(test_varint_u64_decode_null_bytes_consumed);
+    RUN_TEST(test_varint_u64_decode_end_not_found);
 
     RUN_TEST(test_varint_i64_encode_null_output);
     RUN_TEST(test_varint_i64_encode_null_bytes_generated);
     RUN_TEST(test_varint_i64_decode_null_output);
     RUN_TEST(test_varint_i64_decode_null_input);
     RUN_TEST(test_varint_i64_decode_null_bytes_consumed);
+    RUN_TEST(test_varint_i64_decode_end_not_found);
 
     RUN_TEST(test_varint_u64_encode);
     RUN_TEST(test_varint_u64_decode);
