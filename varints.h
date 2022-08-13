@@ -21,6 +21,9 @@
 #define VARINTS_H
 
 
+#include <stdint.h>
+
+
 /**
  * @brief Maximum size of an encoded 64-bit VLQ/varint value
  */
