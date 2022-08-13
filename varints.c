@@ -17,15 +17,12 @@ static void _u64_to_varint(uint64_t input, uint8_t *output, int *bytes_generated
     int byte_count = 0;
     while (input > BYTE_DATA_MASK)
     {
-        *output = (input & BYTE_DATA_MASK) | BYTE_CONT_BIT; // Set continuation bit
-        output++;
-        byte_count++;
+        output[byte_count++] = (input & BYTE_DATA_MASK) | BYTE_CONT_BIT; // Set continuation bit
         input >>= 7u;
     }
 
     // Populate the last byte, no continuation bit this time
-    *output = input;
-    byte_count++;
+    output[byte_count++] = input;
 
     if (NULL != bytes_generated)
     {
