@@ -1,3 +1,22 @@
+/*! \mainpage Variable-length integer (VLQ) encoding and decoding
+ *
+ * \section intro_sec Introduction
+ *
+ * See \link varints.h API documentation for varints.h \endlink .
+ *
+ * This module implements functions for encoding/decoding signed and unsigned integers,
+ * of up to 64 bits in width, to/from <a href="https://en.wikipedia.org/wiki/Variable-length_quantity">VLQ byte streams</a>
+ * (also known as "varints").
+ */
+
+/**
+ * @file varints.h
+ *
+ * @author Erik K. Nyquist
+ *
+ * @brief Variable-length integer (VLQ) encoding and decoding
+ */
+
 #ifndef VARINTS_H
 #define VARINTS_H
 
