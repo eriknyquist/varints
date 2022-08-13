@@ -41,12 +41,12 @@ static void _u64_to_varint(uint64_t input, uint8_t *output, int *bytes_generated
 static int _varint_to_u64(uint8_t *input, uint64_t *output, int *bytes_consumed)
 {
     *output = 0u;
-    uint8_t bit_pos = 0u;
+    uint64_t bit_pos = 0u;
     unsigned int i = 0u;
 
     for (i = 0u; i < VARINTS_MAX_ENCODED_LEN; i++)
     {
-        *output |= (input[i] & BYTE_DATA_MASK) << bit_pos;
+        *output |= ((uint64_t) (input[i] & BYTE_DATA_MASK)) << bit_pos;
         bit_pos += 7u;
 
         if ((input[i] & BYTE_CONT_BIT) == 0u)

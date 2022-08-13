@@ -5,7 +5,7 @@
 /**
  * @brief Maximum size of an encoded 64-bit VLQ/varint value
  */
-#define VARINTS_MAX_ENCODED_LEN (9u)
+#define VARINTS_MAX_ENCODED_LEN (10u)
 
 
 /**
